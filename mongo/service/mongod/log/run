@@ -1,0 +1,2 @@
+#!/bin/bash
+        exec setuidgid nobody multilog s16777215 /var/log/mongod

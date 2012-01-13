@@ -1,0 +1,4 @@
+#!/bin/bash
+	ulimit -SHn 10240
+	exec 2>&1
+	exec /usr/bin/mongos --configdb localhost

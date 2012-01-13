@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[ "$(mount -l | grep -c '/mnt')" -eq 0 ] && \
+        /opt/aws_automation/tools/create_ebs.sh -s 100 -m "/mnt" -d logs -t xfs
