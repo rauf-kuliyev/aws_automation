@@ -4,9 +4,13 @@
 TYPE="nginx_phpfpm"
 NAME="Nginx PHP FPM"
 
-# east:		AMI=ami-7f418316
-# west:		AMI=ami-11d68a54
-# europe:	AMI=ami-47cefa33
+# In order to create an instance with the ephemeral device allocated, the following steps should be performed:
+# Use the snapshot id of the "sda1" device and the kernel id of the desired Amazon Linux AMI, e.g. "snap-74eae31a" and "aki-83396bc6"
+# Register the new AMI using the following command (please notice the REGION, the "--kernel aki-83396bc6" and the "-b /dev/sda1=snap-74eae31a:8:true" parameters:
+#
+# ec2-register --region REGION --kernel aki-83396bc6 -n "Name" -d "Description" --root-device-name /dev/sda1 -b "/dev/sda1=snap-74eae31a:8:true" -b "/dev/sdb1=ephemeral0"
+#
+# Please use resulted AMI id bellow:
 
 AMI="ami-11d68a54"
 INSTANCE_TYPE="t1.micro"

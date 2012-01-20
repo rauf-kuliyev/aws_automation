@@ -39,6 +39,7 @@ URL=$(/opt/aws_automation/tools/create_temp_url.sh -b $BUCKET -f $FILE -t $TIMEO
 	echo " - [ sh, /opt/aws_automation/init.sh, $TYPE ]"
 ) > $USERDATA
 
-instance=$(ec2-run-instances --region $REGION $AMI -g "$SECGROUP" -k "$KEYPAIR" -t "$INSTANCE_TYPE" -z "$ZONE" -b /dev/sda1=:$SIZE -f "$USERDATA" | grep INSTANCE | tr '\t' ,)
+
+instance=$(ec2-run-instances $AMI --region $REGION -g "$SECGROUP" -k "$KEYPAIR" -t "$INSTANCE_TYPE" -z "$ZONE" -b "/dev/sda1=:$SIZE" -b "/dev/sdb1=ephemeral0" -f "$USERDATA" | grep INSTANCE | tr '\t' ,)
 id=$(echo $instance | cut -d, -f 2)
 [ ! -z "$id" ] && ec2-create-tags --region $REGION $id -t Name="$NAME" -t type="$TYPE"
